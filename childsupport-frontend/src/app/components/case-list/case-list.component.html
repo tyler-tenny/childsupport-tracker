@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="header">
+    <div>
+      <h1>Child Support Cases</h1>
+      <p class="subtitle">{{ cases.length }} active cases</p>
+    </div>
+    <button class="logout-btn" (click)="logout()">Sign Out</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading cases...</div>
+
+  <div *ngIf="!loading && cases.length === 0" class="empty">
+    No cases found.
+  </div>
+
+  <div class="case-grid" *ngIf="!loading && cases.length > 0">
+    <div class="case-card" *ngFor="let c of cases" (click)="viewCase(c.id!)">
+      <div class="case-header">
+        <span class="case-number">{{ c.caseNumber }}</span>
+        <span class="badge" [class]="'badge-' + c.status.toLowerCase()">
+          {{ c.status }}
+        </span>
+      </div>
+      <div class="case-type">{{ c.caseType }}</div>
+      <div class="case-date">Opened: {{ c.openedDate }}</div>
+    </div>
+  </div>
+</div>
